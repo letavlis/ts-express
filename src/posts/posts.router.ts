@@ -20,9 +20,7 @@ postsRouter.get("/:id",async (req:Request, res:Response) => {
     
     try {
         const post: Post = await PostService.find(id);
-
         
-
         if (post) {
             
             return res.status(200).send(post);
@@ -65,3 +63,15 @@ postsRouter.post("/", async (req: Request, res: Response)=>{
         res.status(500).send(err.message);
     }
 });
+
+//DELETE posts/:id
+postsRouter.delete("/:id",async (req:Request, res:Response) => {
+    try {
+        const id: number = parseInt(req.params.id, 10);
+        await PostService.remove(id);
+    
+        res.sendStatus(204);
+      } catch (err: any) {
+        res.status(500).send(err.message);
+      }
+})

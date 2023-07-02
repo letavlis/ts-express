@@ -82,3 +82,14 @@ exports.postsRouter.put("/:id", async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+//DELETE posts/:id
+exports.postsRouter.delete("/:id", async (req, res) => {
+    try {
+        const id = parseInt(req.params.id, 10);
+        await PostService.remove(id);
+        res.sendStatus(204);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+});
