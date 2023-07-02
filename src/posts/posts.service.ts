@@ -18,4 +18,5 @@ let posts: Posts = {
 }
 
 export const findAll = async (): Promise<Post[]> => Object.values(posts);
+export const find = async (id:number): Promise<Post> => posts[id];
 
