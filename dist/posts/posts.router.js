@@ -65,3 +65,20 @@ exports.postsRouter.post("/", async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+//PUT posts/:id
+exports.postsRouter.put("/:id", async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    try {
+        const postUpdate = req.body;
+        const existingPost = await PostService.find(id);
+        if (existingPost) {
+            const updatedPost = await PostService.update(id, postUpdate);
+            return res.status(200).json(updatedPost);
+        }
+        const newPost = await PostService.create(postUpdate);
+        res.status(201).json(newPost);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+});

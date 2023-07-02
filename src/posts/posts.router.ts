@@ -45,3 +45,23 @@ postsRouter.post("/", async (req: Request, res: Response)=>{
         res.status(500).send(err.message);
     }
 });
+
+//PUT posts/:id
+ postsRouter.put("/:id",async (req:Request, res:Response) => {
+    const id:number = parseInt(req.params.id, 10);
+    
+    try {
+        const postUpdate: Post = req.body;
+
+        const existingPost: Post = await PostService.find(id);
+
+        if (existingPost) {
+            const updatedPost = await PostService.update(id, postUpdate);
+            return res.status(200).json(updatedPost);
+        }
+        const newPost = await PostService.create(postUpdate);
+        res.status(201).json(newPost);
+    } catch (err:any) {
+        res.status(500).send(err.message);
+    }
+});
