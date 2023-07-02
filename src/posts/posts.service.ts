@@ -20,12 +20,13 @@ let posts: Posts = {
 export const findAll = async (): Promise<Post[]> => Object.values(posts);
 export const find = async (id:number): Promise<Post> => posts[id];
 
-export const create = async (newItem: BasePost): Promise<Post> => {
-    const id = new Date().valueOf();
+export const create = async (newPost: BasePost): Promise<Post> => {
+    const post = findAll();
+    const id = (await post).length+1
   
     posts[id] = {
       id,
-      ...newItem,
+      ...newPost,
     };
   
     return posts[id];

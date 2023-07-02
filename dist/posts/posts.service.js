@@ -19,11 +19,12 @@ const findAll = async () => Object.values(posts);
 exports.findAll = findAll;
 const find = async (id) => posts[id];
 exports.find = find;
-const create = async (newItem) => {
-    const id = new Date().valueOf();
+const create = async (newPost) => {
+    const post = (0, exports.findAll)();
+    const id = (await post).length + 1;
     posts[id] = {
         id,
-        ...newItem,
+        ...newPost,
     };
     return posts[id];
 };
