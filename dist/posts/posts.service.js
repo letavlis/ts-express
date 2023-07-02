@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update = exports.create = exports.find = exports.findAll = void 0;
+exports.remove = exports.update = exports.create = exports.find = exports.findAll = void 0;
 let posts = {
     1: {
         id: 1,
@@ -37,3 +37,11 @@ const update = async (id, itemUpdate) => {
     return posts[id];
 };
 exports.update = update;
+const remove = async (id) => {
+    const item = await (0, exports.find)(id);
+    if (!item) {
+        return null;
+    }
+    delete posts[id];
+};
+exports.remove = remove;

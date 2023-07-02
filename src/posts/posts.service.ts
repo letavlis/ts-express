@@ -44,4 +44,13 @@ export const update = async (
     posts[id] = { id, ...itemUpdate };
   
     return posts[id];
-  };
+};
+
+export const remove = async (id: number):Promise<null | void> => {
+    const item = await find(id);
+    if (!item){
+        return null;
+    }
+
+    delete posts[id];
+};
