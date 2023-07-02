@@ -32,3 +32,16 @@ postsRouter.get("/:id",async (req:Request, res:Response) => {
         res.status(500).send(err.message);
     }
 });
+
+//POST posts
+postsRouter.post("/", async (req: Request, res: Response)=>{
+    try {
+        const post: BasePost = req.body;
+
+        const newPost = await PostService.create(post);
+
+        res.status(200).json(newPost);
+    } catch (err:any) {
+        res.status(500).send(err.message);
+    }
+});
