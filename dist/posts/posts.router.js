@@ -30,10 +30,25 @@ exports.postsRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const PostService = __importStar(require("./posts.service"));
 exports.postsRouter = express_1.default.Router();
+//GET posts
 exports.postsRouter.get("/", async (req, res) => {
     try {
         const posts = await PostService.findAll();
         res.status(200).send(posts);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+//GET posts/:id
+exports.postsRouter.get("/:id", async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    try {
+        const post = await PostService.find(id);
+        if (post) {
+            return res.status(200).send(post);
+        }
+        res.status(404).send("Post not found");
     }
     catch (err) {
         res.status(500).send(err.message);
