@@ -34,22 +34,22 @@ export const create = async (newPost: BasePost): Promise<Post> => {
 
 export const update = async (
     id: number,
-    itemUpdate: BasePost
+    postUpdate: BasePost
   ): Promise<Post | null> => {
-    const item = await find(id);
+    const post = await find(id);
   
-    if (!item) {
+    if (!post) {
       return null;
     }
   
-    posts[id] = { id, ...itemUpdate };
+    posts[id] = { id, ...postUpdate };
   
     return posts[id];
 };
 
 export const remove = async (id: number):Promise<null | void> => {
-    const item = await find(id);
-    if (!item){
+    const post = await find(id);
+    if (!post){
         return null;
     }
 

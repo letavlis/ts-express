@@ -29,18 +29,18 @@ const create = async (newPost) => {
     return posts[id];
 };
 exports.create = create;
-const update = async (id, itemUpdate) => {
-    const item = await (0, exports.find)(id);
-    if (!item) {
+const update = async (id, postUpdate) => {
+    const post = await (0, exports.find)(id);
+    if (!post) {
         return null;
     }
-    posts[id] = { id, ...itemUpdate };
+    posts[id] = { id, ...postUpdate };
     return posts[id];
 };
 exports.update = update;
 const remove = async (id) => {
-    const item = await (0, exports.find)(id);
-    if (!item) {
+    const post = await (0, exports.find)(id);
+    if (!post) {
         return null;
     }
     delete posts[id];
