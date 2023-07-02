@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.create = exports.find = exports.findAll = void 0;
+exports.update = exports.create = exports.find = exports.findAll = void 0;
 let posts = {
     1: {
         id: 1,
@@ -28,3 +28,12 @@ const create = async (newItem) => {
     return posts[id];
 };
 exports.create = create;
+const update = async (id, itemUpdate) => {
+    const item = await (0, exports.find)(id);
+    if (!item) {
+        return null;
+    }
+    posts[id] = { id, ...itemUpdate };
+    return posts[id];
+};
+exports.update = update;

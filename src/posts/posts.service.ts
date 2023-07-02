@@ -19,6 +19,7 @@ let posts: Posts = {
 
 export const findAll = async (): Promise<Post[]> => Object.values(posts);
 export const find = async (id:number): Promise<Post> => posts[id];
+
 export const create = async (newItem: BasePost): Promise<Post> => {
     const id = new Date().valueOf();
   
@@ -29,3 +30,18 @@ export const create = async (newItem: BasePost): Promise<Post> => {
   
     return posts[id];
 };
+
+export const update = async (
+    id: number,
+    itemUpdate: BasePost
+  ): Promise<Post | null> => {
+    const item = await find(id);
+  
+    if (!item) {
+      return null;
+    }
+  
+    posts[id] = { id, ...itemUpdate };
+  
+    return posts[id];
+  };
