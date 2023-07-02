@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
+const posts_router_1 = require("./posts/posts.router");
 dotenv.config();
 //A porta está definida no arquivo .env
 if (!process.env.PORT) {
@@ -39,6 +40,7 @@ const app = (0, express_1.default)();
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+app.use("/posts", posts_router_1.postsRouter);
 app.listen(PORT, () => {
     console.log(`Servidor executando na porta ${PORT}`);
 });
