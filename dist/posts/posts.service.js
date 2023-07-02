@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.find = exports.findAll = void 0;
+exports.create = exports.find = exports.findAll = void 0;
 let posts = {
     1: {
         id: 1,
@@ -19,3 +19,12 @@ const findAll = async () => Object.values(posts);
 exports.findAll = findAll;
 const find = async (id) => posts[id];
 exports.find = find;
+const create = async (newItem) => {
+    const id = new Date().valueOf();
+    posts[id] = {
+        id,
+        ...newItem,
+    };
+    return posts[id];
+};
+exports.create = create;
